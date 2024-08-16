@@ -370,21 +370,21 @@ def adding_issue_material(obj, absolute_snapshot_path):
     
     bpy.ops.object.mode_set(mode='OBJECT')        
 
-# Find desktop path
+# find desktop path
 def get_desktop_path():
-    # Try to find a OneDrive Desktop path
+    # try to find a OneDrive Desktop path
     desktop_onedrive = os.path.join(os.path.expanduser("~"), "OneDrive", "Desktop")
     if os.path.exists(desktop_onedrive):
         print(f"OneDrive desktop path found: {desktop_onedrive}")
         return desktop_onedrive
 
-    # Try to find a standard Desktop path
+    # try to find a standard Desktop path
     desktop_standard = os.path.join(os.path.expanduser("~"), "Desktop")
     if os.path.exists(desktop_standard):
         print(f"Standard desktop path found: {desktop_standard}")
         return desktop_standard
 
-    # Path not found
+    # path not found
     print("No desktop path found.")
     return None
 
@@ -392,16 +392,16 @@ def get_desktop_path():
     
 def get_image_from_orthogonal_view(obj):
     
-    # Get the absolute path to the desktop
+    # get the absolute path to the desktop
     desktop_path = get_desktop_path()
 
-    # Check if a path was found
+    # check if a path was found
     if desktop_path:
-        # Path for the new folder on the desktop
+        # path for the new folder on the desktop
         folder_path = os.path.join(desktop_path, "BCFIssueViewImages")
         print(f"Full folder path: {folder_path}")  # Debug output
 
-        # Create the folder if it does not exist
+        # create the folder if it does not exist
         try:
             if not os.path.exists(folder_path):
                 os.makedirs(folder_path)
@@ -685,7 +685,7 @@ def main_set_camera_and_create_face(context):
     # find the first object in the view of the camera
     first_object = get_first_object_in_view(camera)
     if first_object:
-        print(f"Das gefundene Objekt ist '{first_object.name}'.")
+        print(f"The found object is '{first_object.name}'.")
         # get the largest visible face of the object
         largest_face = get_largest_visible_face(camera, first_object)
 
@@ -697,7 +697,7 @@ def main_set_camera_and_create_face(context):
                 # create a new face at a distance in the direction of the face normal
                 new_object, annotation_obj = create_mesh_from_faces(similar_faces, first_object, distance_between_layers, number_cuts)
                 uv_perspective_from_view(new_object)
-                print(f"Neue Fläche für Objekt '{first_object.name}' basierend auf der größten sichtbaren Fläche erzeugt.")
+                print(f"New face created for object '{first_object.name}' based on the visible face.")
             else:
                 print("No similar faces found.")
         else:
